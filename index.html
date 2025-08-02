@@ -1,1 +1,494 @@
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Maison du Bélier - Béliers de Race</title>
+    <style>
+        /* Variables CSS */
+        :root {
+            --primary-green: #2d5016;
+            --secondary-brown: #8b4513;
+            --accent-gold: #d4af37;
+            --light-beige: #f5f1e6;
+            --dark-text: #333;
+            --light-text: #f8f8f8;
+        }
+
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--light-beige);
+        }
+
+        /* En-tête */
+        header {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-brown));
+            color: var(--light-text);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--accent-gold);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Bannière principale */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400"><rect width="800" height="400" fill="%232d5016"/><circle cx="200" cy="200" r="80" fill="%23d4af37" opacity="0.3"/><circle cx="600" cy="150" r="60" fill="%238b4513" opacity="0.3"/></svg>');
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-gold);
+            color: var(--dark-text);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Sections */
+        section {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--primary-green);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        /* À propos */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        /* Catalogue */
+        .filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-btn {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent-gold);
+            color: var(--dark-text);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            height: 200px;
+            background: linear-gradient(45deg, #8b4513, #2d5016);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        .product-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Pied de page */
+        footer {
+            background: var(--primary-green);
+            color: var(--light-text);
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--light-text);
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-gold);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête -->
+    <header>
+        <div class="header-content">
+            <div class="logo">LA MAISON <span>DU BELIER</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#catalogue">Béliers</a></li>
+                    <li><a href="#about">À propos</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Bannière principale -->
+    <section id="accueil" class="hero">
+        <div class="hero-content">
+            <h1>LA MAISON DU BELIER</h1>
+            <p>Des béliers de race exceptionnelle pour votre élevage</p>
+            <p>Votre partenaire de confiance pour l'achat de béliers de qualité</p>
+            <a href="#catalogue" class="cta-button">Voir nos béliers</a>
+        </div>
+    </section>
+
+    <!-- À propos -->
+    <section id="about">
+        <h2 class="section-title">À propos de nous</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Bienvenue chez <strong>La Maison du Bélier</strong>, votre référence en France pour l'achat de béliers de race supérieure. Depuis 2010, nous sélectionnons les meilleurs béliers destinés à l'élevage, à la reproduction et à la viande.</p>
+                <p>Notre élevage suit les normes les plus strictes en matière de bien-être animal et de traçabilité.</p>
+            </div>
+            <div class="about-text">
+                <p>Nous proposons des béliers de races reconnues : Charollais, Texel, Limousin, Ile-de-France et Romney Marsh. Chaque animal est soigneusement sélectionné pour sa robustesse, sa fertilité et sa qualité génétique.</p>
+            </div>
+        </div>
+
+        <div class="services">
+            <div class="service-card">
+                <div class="service-icon">🐑</div>
+                <h3>Béliers de races</h3>
+                <p>Races reconnues et certifiées</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🛡️</div>
+                <h3>Garantie santé</h3>
+                <p>Certificats et garanties inclus</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🚚</div>
+                <h3>Livraison</h3>
+                <p>Partout en France</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💡</div>
+                <h3>Conseils</h3>
+                <p>Expertise et accompagnement</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalogue -->
+    <section id="catalogue">
+        <h2 class="section-title">Nos Béliers</h2>
+        
+        <div class="filters">
+            <button class="filter-btn active">Toutes les races</button>
+            <button class="filter-btn">Charollais</button>
+            <button class="filter-btn">Texel</button>
+            <button class="filter-btn">Limousin</button>
+            <button class="filter-btn">Ile-de-France</button>
+        </div>
+
+        <div class="products-grid">
+            <!-- Bélier 1 -->
+            <div class="product-card">
+                <div class="product-image">🐏</div>
+                <div class="product-info">
+                    <h3 class="product-title">Bélier Charollais</h3>
+                    <p class="product-description">8 mois - 70 kg</p>
+                    <p class="product-description">Excellent pour la reproduction et l'engraissement</p>
+                    <div class="product-price">350 €</div>
+                    <button class="cta-button">Ajouter au panier</button>
+                </div>
+            </div>
+
+            <!-- Bélier 2 -->
+            <div class="product-card">
+                <div class="product-image">🐏</div>
+                <div class="product-info">
+                    <h3 class="product-title">Bélier Texel</h3>
+                    <p class="product-description">6 mois - 60 kg</p>
+                    <p class="product-description">Musclé et très productif</p>
+                    <div class="product-price">320 €</div>
+                    <button class="cta-button">Ajouter au panier</button>
+                </div>
+            </div>
+
+            <!-- Bélier 3 -->
+            <div class="product-card">
+                <div class="product-image">🐏</div>
+                <div class="product-info">
+                    <h3 class="product-title">Bélier Limousin</h3>
+                    <p class="product-description">12 mois - 80 kg</p>
+                    <p class="product-description">Viande de qualité exceptionnelle</p>
+                    <div class="product-price">380 €</div>
+                    <button class="cta-button">Ajouter au panier</button>
+                </div>
+            </div>
+
+            <!-- Bélier 4 -->
+            <div class="product-card">
+                <div class="product-image">🐏</div>
+                <div class="product-info">
+                    <h3 class="product-title">Bélier Ile-de-France</h3>
+                    <p class="product-description">10 mois - 75 kg</p>
+                    <p class="product-description">Excellent pour la reproduction</p>
+                    <div class="product-price">340 €</div>
+                    <button class="cta-button">Ajouter au panier</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <h2 class="section-title">Contactez-nous</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Informations de contact</h3>
+                <p><strong>Adresse :</strong> Ferme du Pré Vert, 15 Rue des Moutons, 61000 Alençon</p>
+                <p><strong>Téléphone :</strong> 01 23 45 67 89</p>
+                <p><strong>Email :</strong> contact@lamaisondubelier.com</p>
+                <p><strong>Horaires :</strong> Lundi-Vendredi 9h-18h</p>
+            </div>
+            <div class="about-text">
+                <h3>Formulaire de contact</h3>
+                <form style="display: flex; flex-direction: column; gap: 1rem;">
+                    <input type="text" placeholder="Votre nom" style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+                    <input type="email" placeholder="Votre email" style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+                    <input type="tel" placeholder="Votre téléphone" style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+                    <textarea placeholder="Votre message" rows="4" style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+                    <button type="submit" class="cta-button">Envoyer le message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>La Maison du Bélier</h3>
+                <p>Votre partenaire de confiance pour l'achat de béliers de qualité depuis 2010.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#catalogue">Nos béliers</a></li>
+                    <li><a href="#about">À propos</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Informations</h3>
+                <ul>
+                    <li><a href="#">Livraison</a></li>
+                    <li><a href="#">Garanties</a></li>
+                    <li><a href="#">Paiement</a></li>
+                    <li><a href="#">Mentions légales</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024 La Maison du Bélier. Tous droits réservés.</p>
+        </div>
+    </footer>
+</body>
+</html>
